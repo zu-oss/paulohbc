@@ -157,3 +157,62 @@ body.view-cmd footer, body.view-cmd .footer {
 body.view-modern footer, body.view-modern .footer {
     color: var(--text-modern);
 }
+/* ==============================================================
+   REGRAS DE RESPONSIVIDADE PARA CELULAR (TELAS ATÉ 768px)
+   ============================================================== */
+@media (max-width: 768px) {
+    /* 1. Ajustes do Body */
+    body {
+        padding: 80px 15px 60px 15px; /* Abre espaço no topo para o botão não cobrir seu nome */
+    }
+
+    /* 2. Ajustes do Cabeçalho Moderno (Foto + Informações) */
+    .profile-header {
+        flex-direction: column; /* Alinha a foto acima do texto, em vez de um ao lado do outro */
+        text-align: center;     /* Centraliza todos os textos no celular */
+        padding: 20px;
+        gap: 15px;
+    }
+
+    /* Evita que a foto fique colada na borda da tela */
+    .profile-img {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto; /* Centraliza a imagem perfeitamente */
+    }
+
+    /* 3. Ajuste dos botões de contato (badges) */
+    .contact-badges {
+        flex-wrap: wrap;       /* Se não couberem na mesma linha, eles pulam para baixo automaticamente */
+        justify-content: center; /* Centraliza o bloco de links */
+        gap: 10px;
+        margin-top: 15px;
+        width: 100%;
+    }
+
+    .badge {
+        flex: 1 1 calc(50% - 10px); /* Faz os botões ocuparem 2 por linha de forma harmônica */
+        min-width: 110px;          /* Impede que o texto quebre de forma feia igual ao "E-mail" no print */
+        text-align: center;
+        padding: 10px;
+    }
+
+    /* 4. Ajustes finos de textos no celular */
+    .profile-intro h1 {
+        font-size: 1.4rem; /* Diminui um pouco o tamanho do nome para não quebrar muitas linhas */
+    }
+
+    .profile-intro h2 {
+        font-size: 0.95rem;
+    }
+
+    /* Ajuste do botão de alternar no mobile para não cobrir o conteúdo */
+    .toggle-btn {
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        padding: 10px 16px;
+        font-size: 0.85rem;
+        width: auto;
+    }
+}
