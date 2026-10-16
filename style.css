@@ -1,0 +1,159 @@
+:root {
+    --bg-modern: #f0f4f8;
+    --bg-cmd: #0c0c0c;
+    --text-modern: #1a202c;
+    --text-cmd: #cccccc;
+    --cmd-green: #00ff00;
+    --accent-modern: #2b6cb0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column; /* Organiza os elementos de cima para baixo */
+    align-items: center;    /* Centraliza os blocos na horizontal */
+    justify-content: flex-start; /* Permite que o conteúdo flua naturalmente para baixo */
+    padding: 60px 20px 80px 20px; /* Adiciona espaçamento na parte inferior para o rodapé */
+    position: relative;     /* Permite o posicionamento do footer absoluto */
+}
+
+/* Alternância de Telas */
+body.view-modern {
+    background-color: var(--bg-modern);
+    color: var(--text-modern);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+body.view-modern .screen-cmd { display: none; }
+
+body.view-cmd {
+    background-color: var(--bg-cmd);
+    color: var(--text-cmd);
+    font-family: 'Consolas', monospace;
+}
+body.view-cmd .screen-modern { display: none; }
+
+/* Botão Flutuante */
+.toggle-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 24px;
+    font-weight: bold;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    z-index: 100;
+}
+body.view-modern .toggle-btn {
+    background-color: #1a202c;
+    color: #ffffff;
+}
+body.view-cmd .toggle-btn {
+    background-color: var(--cmd-green);
+    color: #000000;
+}
+
+.container {
+    width: 100%;
+    max-width: 850px;
+}
+
+/* Estilos da Interface Moderna */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    margin-bottom: 20px;
+}
+.profile-img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--accent-modern);
+}
+.profile-intro h1 { font-size: 1.6rem; color: #111; }
+.profile-intro h2 { font-size: 1rem; color: #4a5568; margin: 5px 0; }
+.contact-badges { display: flex; gap: 10px; margin-top: 10px; }
+.badge { background: #edf2f7; padding: 6px 12px; border-radius: 20px; text-decoration: none; color: #4a5568; font-size: 0.85rem; font-weight: 600; }
+.badge:hover { background: var(--accent-modern); color: #fff; }
+
+.modern-content { display: flex; flex-direction: column; gap: 20px; }
+.card { background: #ffffff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+.card h3 { margin-bottom: 12px; color: var(--accent-modern); border-bottom: 2px solid #edf2f7; padding-bottom: 5px; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tags span { background: #e2e8f0; padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; }
+
+/* Estilos do CMD */
+.terminal-window { border: 1px solid #333; border-radius: 6px; overflow: hidden; }
+.terminal-header { background: #202020; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
+.terminal-header .title { font-size: 0.85rem; color: #fff; }
+.win-buttons .dot { display: inline-block; width: 10px; height: 10px; background: #555; border-radius: 50%; margin-left: 5px; }
+.terminal-body { padding: 25px; line-height: 1.6; }
+.path { color: var(--cmd-green); }
+.cmd-text-highlight { color: #ffffff; font-weight: bold; }
+.cmd-text { margin-left: 15px; }
+
+/* Oculta os blocos de resposta antes da digitação começar */
+.typewriter-response {
+    display: none;
+    white-space: normal;
+    margin-left: 15px;
+    line-height: 1.6;
+}
+
+/* Força a exibição em bloco quando ativado pelo JS */
+.typewriter-response.active {
+    display: block !important;
+}
+
+/* Cor dos links clicáveis dentro do Modo Terminal */
+body.view-cmd .typewriter-response a {
+    color: #00a8ff; /* Um azul visível sobre o fundo preto */
+    text-decoration: underline;
+}
+body.view-cmd .typewriter-response a:hover {
+    color: var(--cmd-green);
+}
+
+/* Controle de animação do terminal */
+.hidden-block { display: none; }
+.show-block { display: block !important; }
+.final-cursor { display: none; }
+
+.blink { animation: blinker 1s linear infinite; color: var(--cmd-green); font-weight: bold; }
+@keyframes blinker { 50% { opacity: 0; } }
+/* --- ADICIONE ESTE BLOCO NO FINAL DO SEU CSS --- */
+footer, .footer {
+    position: absolute;
+    bottom: 20px;          /* Cola ele bem próximo da borda inferior */
+    left: 50%;
+    transform: translateX(-50%); /* Técnica para garantir a centralização perfeita */
+    font-size: 0.75rem;    /* Deixa o texto bem pequenininho */
+    opacity: 0.6;          /* Deixa a cor mais suave para não chamar tanta atenção */
+    text-align: center;
+    width: 100%;
+    pointer-events: none;  /* Evita que ele atrapalhe cliques na página */
+}
+
+/* Se quiser que o texto do rodapé fique verde brilhante quando o CMD estiver ativo */
+body.view-cmd footer, body.view-cmd .footer {
+    color: var(--cmd-green);
+    opacity: 0.7;
+    font-family: 'Consolas', monospace;
+}
+
+/* Garante que no modo moderno ele use a fonte padrão e cor escura */
+body.view-modern footer, body.view-modern .footer {
+    color: var(--text-modern);
+}
