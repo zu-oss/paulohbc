@@ -58,7 +58,14 @@ body.view-cmd .toggle-btn {
     background-color: var(--cmd-green);
     color: #000000;
 }
-
+.btn-download {
+    background-color: var(--accent-modern) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.btn-download:hover {
+    background-color: #1a202c !important;
+}
 .container {
     width: 100%;
     max-width: 850px;
